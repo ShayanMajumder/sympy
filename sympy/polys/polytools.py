@@ -53,6 +53,8 @@ import sympy.polys
 
 import mpmath
 from mpmath.libmp.libhyper import NoConvergence
+from sympy.abc import x, y,z
+from sympy.parsing.sympy_parser import parse_expr
 
 
 
@@ -4443,6 +4445,16 @@ def degree(f, gen=0):
     sympy.polys.polytools.Poly.total_degree
     degree_list
     """
+    if type(f)==type((x+y)**2) or type(f)==type(20*(x**40 + y)**10):#to match types <class 'sympy.core.power.Pow'> and 
+                                                                #<class 'sympy.core.mul.Mul'>
+    inside=str(f)
+    gen1=gen
+    result = inside.rindex('**')
+    l=inside[:result]
+    exponent=int(inside[result+2:])
+    expression=parse_expr(l)
+
+    return degree(expression, gen=gen1)*exponent
 
     f = sympify(f, strict=True)
     gen_is_Num = sympify(gen, strict=True).is_Number
