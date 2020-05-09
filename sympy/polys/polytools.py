@@ -53,7 +53,7 @@ import sympy.polys
 
 import mpmath
 from mpmath.libmp.libhyper import NoConvergence
-from sympy.abc import x, y,z
+from sympy.abc import x, y,z#for issue 6322
 from sympy.parsing.sympy_parser import parse_expr
 
 
